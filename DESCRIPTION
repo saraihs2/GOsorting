@@ -1,13 +1,15 @@
 Package: GOsorting
-Version: 0.01.1
+Version: 0.0
 Date: 2017-12-19
-Title: Tools for Comparative Transcriptomics and Functional Enrichment in Honey bees 
+Title: GO sorting and matching of terms found enriched in the honey bee brain during defense
 Authors@R: person("Sarai", "Stuart", role = c("aut", "cre"),
                   email = "saraihs2@illinois.edu")
-Author: Sarai Stuart [aut, cre],
+Author: Sarai Stuart [aut, cre]
 Maintainer: Sarai Stuart <saraihs2@illinois.edu>
-Description: This package includes functions to filter and sort new GO data and compare enriched genes to those
-GO terms previously enriched and identified in the honey bee brain associated with the defensive response. This 
-packaged is designed to easily pull out conserved enriched GO functions between data sets or species. 
-Url:https://github.com/saraihs2/GOsorting
+Description: This package includes functions to process and sort Gene Ontology enrichedment terms
+  annotated from RNA sequencing data for comparison to the gene enrichment pattern in the honey bee brain.
+  Comparison data can come from different experiments or other species to look for conserved brain patterns.
+Url: https://github.com/saraihs2/GOsorting
 License: GPL-3
+Imports: dplyr,
+    reshape2
