@@ -115,32 +115,42 @@ GOtermSep <- function(TrimmedData){
 
 myGOterm <- GOtermSep(myTrimData)
 
-####FUNCTION 3: match my GO terms with the differentially enriched GO terms in the brain of the
+####FUNCTION 3: read in the reference honey bee GO file from Alaux et al. 2009 ####
+
+#read in modified csv file  
+RefCSV <- function(HBrefPath){
+  
+  HbGOtable <- read.csv(HBrefPath,
+                      
+                      #keep column headers
+                      header = TRUE,
+                      
+                      #separate strings at the commas
+                      sep = ",",
+                      
+                      #convert missing data (.) to NAs
+                      na.strings = ".",
+                      
+                      #keep all strings as strings
+                      stringsAsFactors = FALSE,
+                      
+                      #column headers
+                      col.names = c("GO #",
+                                    "GO name",
+                                    "change in expression: alarm pher : control"))
+  
+  return(HbGOtable)
+}
+
+HBrefPath <- "./HB_alarm_GOterms.csv"
+HbGOtable <- RefCSV(HBrefPath)
+
+####FUNCTION 4: match my GO terms with the differentially enriched GO terms in the brain of the
 #honey be defensive response, and subset the list of terms ####
 
 #define function with two arguments, i.e. both my data matrix and Hb matrix must be specified in 
 #order to match terms present in both sets of data
 matchHBGO<- function(sampleGenes, GOref){
-  
-  #read in modified csv file  
-  HbGOtable <- read.csv(file = "HB_alarm_GOterms.csv",
-                        
-                        #keep column headers
-                        header = TRUE,
-                        
-                        #separate strings at the commas
-                        sep = ",",
-                        
-                        #convert missing data (.) to NAs
-                        na.strings = ".",
-                        
-                        #keep all strings as strings
-                        stringsAsFactors = FALSE,
-                        
-                        #column headers
-                        col.names = c("GO #",
-                                      "GO name",
-                                      "change in expression: alarm pher : control"))
   
   library(reshape2)
   library(dplyr)

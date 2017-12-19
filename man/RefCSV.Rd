@@ -1,5 +1,5 @@
-\name{readTrinOutput}
-\alias{readTrinOutput}
+\name{RefCSV}
+\alias{RefCSV}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
@@ -8,12 +8,12 @@
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-readTrinOutput(path)
+RefCSV(HBrefPath)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{path}{
-%%     ~~Describe \code{path} here~~
+  \item{HBrefPath}{
+%%     ~~Describe \code{HBrefPath} here~~
 }
 }
 \details{
@@ -47,21 +47,12 @@ readTrinOutput(path)
 ##--	or do  help(data=index)  for the standard data sets.
 
 ## The function is currently defined as
-function (path) 
+function (HBrefPath) 
 {
-    fullTable <- read.csv(path, header = TRUE, sep = ",", na.strings = ".", 
-        col.names = c("gene_id", "transcript_id", "sprot_Top_BLASTX_hit", 
-            "RNAMMER", "prot_id", "prot_coords", "sprot_Top_BLASTP_hit", 
-            "custom_pombe_pep_BLASTX", "custom_pombe_pep_BLASTP", 
-            "Pfam", "SignalP", "TmHMM", "eggnog", "Kegg", "gene_ontology_blast", 
-            "gene_ontology_pfam", "transcript", "peptide"), stringsAsFactors = FALSE)
-    dataTrim <- data.frame(fullTable$gene_id, fullTable$transcript_id, 
-        fullTable$gene_ontology_blast, fullTable$gene_ontology_pfam, 
-        stringsAsFactors = FALSE)
-    colnames(dataTrim) <- c("gene_id", "transcript_id", "gene_ontology_blast", 
-        "gene_ontology_pfam")
-    newTrim <- subset(dataTrim, (!is.na(dataTrim$gene_id)))
-    return(newTrim)
+    HbGOtable <- read.csv(HBrefPath, header = TRUE, sep = ",", 
+        na.strings = ".", stringsAsFactors = FALSE, col.names = c("GO #", 
+            "GO name", "change in expression: alarm pher : control"))
+    return(HbGOtable)
   }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
