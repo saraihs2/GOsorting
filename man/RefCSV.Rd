@@ -1,61 +1,52 @@
 \name{RefCSV}
 \alias{RefCSV}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
-%%  ~~function to do ... ~~
+Read in honey bee GO reference file 
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Read in the .CSV file containing honey bee GO terms, GO functions, and whether or not the gene was up or down regulated. Reference data file is from the honey bee alarm pheromone experiment. Differential genes were measure in the brain and regulation response is measure as alarm pheromone : control.
 }
 \usage{
 RefCSV(HBrefPath)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{HBrefPath}{
-%%     ~~Describe \code{HBrefPath} here~~
+Argument file from the honey bee alarm pheromone experiment
 }
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
+
 }
 \value{
-%%  ~Describe the value returned
+Returns a data frame containing GO terms, functions, and regulation (up or down)
 %%  If it is a LIST, use
 %%  \item{comp1 }{Description of 'comp1'}
 %%  \item{comp2 }{Description of 'comp2'}
 %% ...
 }
 \references{
-%% ~put references to the literature/web site here ~
+Alaux et al. 2009
 }
 \author{
-%%  ~~who you are~~
+Sarai Stuart
 }
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{matchHBGO}}
+\code{\link{GOtermSep}}
 }
-\examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
-## The function is currently defined as
-function (HBrefPath) 
-{
-    HbGOtable <- read.csv(HBrefPath, header = TRUE, sep = ",", 
-        na.strings = ".", stringsAsFactors = FALSE, col.names = c("GO #", 
-            "GO name", "change in expression: alarm pher : control"))
-    return(HbGOtable)
+\examples{
+
+# Path to Honey Bee reference file
+HBrefPath <- system.file("extdata",
+                          "./HB_alarm_GOterms.csv",
+                          package = "GOsorting")
+                          
+# Create the reference table to compare to input data                           
+HbGOtable <- RefCSV(HBrefPath)
+
   }
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+

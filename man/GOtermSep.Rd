@@ -1,71 +1,44 @@
 \name{GOtermSep}
 \alias{GOtermSep}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
-%%  ~~function to do ... ~~
+Separate GO terms for each Gene 
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+This function separates the single string of mutiple GO terms into a vectorized list of separate GO terms per gene. The list is then stored as a matrix so that all GO terms are characterized for each gene. 
 }
 \usage{
 GOtermSep(TrimmedData)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{TrimmedData}{
-%%     ~~Describe \code{TrimmedData} here~~
+Trimmed data output from readTrinOutput function
 }
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
-\value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
+\value{
+Returns a data frame of GO terms listed per gene id. 
+
+Output is argument 1 for matchHBGO function
+}
+
+\author{
+Sarai Stuart
+}
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{readTrinOutput}}
+\code{\link{matchHBGO}}
 }
-\examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
-## The function is currently defined as
-function (TrimmedData) 
-{
-    nrows <- length(TrimmedData$gene_id)
-    pattern <- "GO:[:digit:]{7}"
-    myList <- list()
-    length(myList) <- length(nrows)
-    geneNames <- character(nrows)
-    for (i in 1:nrows) {
-        geneNames[i] <- TrimmedData$gene_id[i]
-        GOblastCol <- myTrimData$gene_ontology_blast[i]
-        GOtermVec <- as.vector(c(stringr::str_match_all(GOblastCol, 
-            pattern)[[1]]))
-        myList[[i]] <- GOtermVec
-    }
-    names(myList) <- geneNames
-    return(as.data.frame(myList))
-  }
+\examples{
+# example test file
+ TrimmedData <- system.file("extdata",
+                       "myTrimData.csv",
+                       package = "GOsorting")
+
+# Insert "TrimmedData" argument into function
+GOtermSep(myTrimData)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+

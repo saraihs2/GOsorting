@@ -5,7 +5,7 @@
 Read, process, and trim Trinotate output 
 }
 \description{
-The function processes differentially expressed RNA data that has been analyzed for Gene Ontology enrichment. Function reads in data, processes out data with unidentified genes, and trims data columns needed for GO matching. Function is compatible with the the .CSV-converted output file format from Trinotate:Transcriptome Functional Annotation and Analysis suite.
+Reads .CSV files only. The function processes differentially expressed RNA data that has been analyzed for Gene Ontology enrichment. Function reads in data, processes out data with unidentified genes, and trims data columns needed for GO matching. Function is compatible with the the .CSV-converted output file format from Trinotate:Transcriptome Functional Annotation and Analysis suite.
 }
 \usage{
 readTrinOutput(path)
