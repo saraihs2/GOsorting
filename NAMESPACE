@@ -1,0 +1,4 @@
+export(readTrinOutput, GOtermSep, RefCSV, matchHBGO)
+
+import(reshape2, dplyr)
+  
