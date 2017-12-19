@@ -1,11 +1,11 @@
 \name{matchHBGO}
 \alias{matchHBGO}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
-%%  ~~function to do ... ~~
+Match my GO terms to honey bee GO terms
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Match the GO terms found on my data list to those found to differentially regulated in the honey bee. Matches indicated conserved GO functions between data sets. Matched GO terms are returned in addition to the input gene id, function of GO term, and the differential regualtion that was found in the honey bee. Function requires the installed packages reshape2 and diplyr.   
 }
 \usage{
 matchHBGO(sampleGenes, GOref)
@@ -13,15 +13,13 @@ matchHBGO(sampleGenes, GOref)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{sampleGenes}{
-%%     ~~Describe \code{sampleGenes} here~~
+Argument is the data frame of separated GO terms per gene id, can be created from \code{\link{GOtermSep}}
 }
   \item{GOref}{
-%%     ~~Describe \code{GOref} here~~
+Argument is the reference data frame of GO terms from the honey bee, can be input from \code{\link{RefCSV}}
 }
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{
 %%  ~Describe the value returned
 %%  If it is a LIST, use
@@ -30,42 +28,33 @@ matchHBGO(sampleGenes, GOref)
 %% ...
 }
 \references{
-%% ~put references to the literature/web site here ~
+https://github.com/hadley/reshape
+https://github.com/tidyverse/dplyr
 }
 \author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
+Sarai
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{GOtermSep}}
+\code{\link{RefCSV}}
+
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
-## The function is currently defined as
-function (sampleGenes, GOref) 
-{
-    library(reshape2)
-    library(dplyr)
-    col_num = ncol(sampleGenes)
-    data_long <- melt(sampleGenes, id.vars = 0, variable.name = "geneID", 
-        value.name = "GO_ID")
-    colnames(GOref)[1] <- "GO_ID"
-    merged_data <- merge(data_long, GOref, by = "GO_ID")
-    merged_data <- arrange(merged_data, geneID)
-    colnames(merged_data)[3] <- "function"
-    colnames(merged_data)[4] <- "differential_regulation"
-    return(merged_data)
+# Path my GO term test file
+myGOterm <- system.file("extdata",
+                          "./myGOterm.csv",
+                          package = "GOsorting")
+                          
+# Path reference honey bee file
+HbGOtable <- system.file("extdata",
+                          "./HbGOtable.csv",
+                          package = "GOsorting")
+                          
+# Create a data frame of matched GO terms between my data and the honey bee                           
+matchHBGO(myGOterm,HbGOtable)
   }
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+
