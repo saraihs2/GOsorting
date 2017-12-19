@@ -1,5 +1,6 @@
 ###!!!!must convert Trinotate output Excel doc into a .csv file input to GOsorting.R!!!####
 
+
 ####FUNCTION 1: read in and trim data from Trinotate output ####
 
 #read and extract data from CSV file
@@ -59,21 +60,14 @@ readTrinOutput <- function(path){
                         "gene_ontology_pfam")
   
   #filter out rows of trimmed data in which no gene id is available
-  newTrim <- subset(dataTrim,(!is.na(dataTrim$gene_id)))
+  myTrimData <- subset(dataTrim,(!is.na(dataTrim$gene_id)))
   
-  return(newTrim)                      
+  return(myTrimData)  
+  
 }
 
-#input path to user csv file
-#data is read into the global environment as vectors
 pathVar <- "./New_GO_test_file.csv"
-
-#output of function 1
-myTrimData <- readTrinOutput(pathVar) 
-
-#output full data frame
-myTrimData
-
+myTrimData <- readTrinOutput(pathVar)
 
 ####FUNCTION 2: Separate individual GO terms listed per gene ####
 
@@ -116,37 +110,10 @@ GOtermSep <- function(TrimmedData){
     myList[[i]] <- GOtermVec
   }
   names(myList) <- geneNames
-  return(myList)
+  return(as.data.frame(myList))
 }
-#convert output of function into a data frame and save 
-myGOterm <- as.data.frame(GOtermSep(myTrimData))
 
-
-#### Load in csv file of GO terms from honey bee brain response to alarm pheromone, Alaux et al. 2009
-
-#read in modified csv file  
-HbGOtable <- read.csv(file = "HB_alarm_GOterms.csv",
-                      
-                      #keep column headers
-                      header = TRUE,
-                      
-                      #separate strings at the commas
-                      sep = ",",
-                      
-                      #convert missing data (.) to NAs
-                      na.strings = ".",
-                      
-                      #keep all strings as strings
-                      stringsAsFactors = FALSE,
-                      
-                      #column headers
-                      col.names = c("GO #",
-                                    "GO name",
-                                    "change in expression: alarm pher : control"))
-
-#read data.frame as matrix for comparison
-head(HbGOtable)
-  
+myGOterm <- GOtermSep(myTrimData)
 
 ####FUNCTION 3: match my GO terms with the differentially enriched GO terms in the brain of the
 #honey be defensive response, and subset the list of terms ####
@@ -154,6 +121,27 @@ head(HbGOtable)
 #define function with two arguments, i.e. both my data matrix and Hb matrix must be specified in 
 #order to match terms present in both sets of data
 matchHBGO<- function(sampleGenes, GOref){
+  
+  #read in modified csv file  
+  HbGOtable <- read.csv(file = "HB_alarm_GOterms.csv",
+                        
+                        #keep column headers
+                        header = TRUE,
+                        
+                        #separate strings at the commas
+                        sep = ",",
+                        
+                        #convert missing data (.) to NAs
+                        na.strings = ".",
+                        
+                        #keep all strings as strings
+                        stringsAsFactors = FALSE,
+                        
+                        #column headers
+                        col.names = c("GO #",
+                                      "GO name",
+                                      "change in expression: alarm pher : control"))
+  
   library(reshape2)
   library(dplyr)
 
@@ -181,11 +169,11 @@ matchHBGO<- function(sampleGenes, GOref){
   return(merged_data)
 }
 
-matched_GOs<-matchHBGO(myGOterm,HbGOtable)
+matchHBGO(myGOterm,HbGOtable)
 
 #write out CSV file containing merged results into working directory
 #set append = TRUE if you want to run additional sets of data and add results to end
-write.csv(matched_GOs, "Matched_honeybee_GOterms", append = FALSE)
+#write.csv(matched_GOs, "Matched_honeybee_GOterms", append = FALSE)
 
 
 
