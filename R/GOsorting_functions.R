@@ -66,8 +66,7 @@ readTrinOutput <- function(path){
   
 }
 
-pathVar <- "./New_GO_test_file.csv"
-myTrimData <- readTrinOutput(pathVar)
+
 
 ####FUNCTION 2: Separate individual GO terms listed per gene ####
 
@@ -113,7 +112,7 @@ GOtermSep <- function(TrimmedData){
   return(as.data.frame(myList))
 }
 
-myGOterm <- GOtermSep(myTrimData)
+
 
 ####FUNCTION 3: read in the reference honey bee GO file from Alaux et al. 2009 ####
 
@@ -179,11 +178,7 @@ matchHBGO<- function(sampleGenes, GOref){
   return(merged_data)
 }
 
-matchHBGO(myGOterm,HbGOtable)
 
-#write out CSV file containing merged results into working directory
-#set append = TRUE if you want to run additional sets of data and add results to end
-#write.csv(matched_GOs, "Matched_honeybee_GOterms", append = FALSE)
 
 
 
