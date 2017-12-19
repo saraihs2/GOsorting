@@ -34,11 +34,11 @@ Sarai Stuart
 
 \examples{
 # example test file
- TrimmedData <- system.file("extdata",
+ myTrimData <- system.file("extdata",
                        "myTrimData.csv",
                        package = "GOsorting")
 
-# Insert "TrimmedData" argument into function
+# Insert "myTrimData" argument into function
 GOtermSep(myTrimData)
 }
 

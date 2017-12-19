@@ -71,11 +71,11 @@ readTrinOutput <- function(path){
 ####FUNCTION 2: Separate individual GO terms listed per gene ####
 
 #separate individual GO terms listed for each gene in the column gene_ontology_blast
-GOtermSep <- function(TrimmedData){
+GOtermSep <- function(myTrimData){
   
   #size for preallocation of memory is the length of gene_id column because we are matching 
   #gene id and it's associated GO terms
-  nrows <- length(TrimmedData$gene_id)
+  nrows <- length(myTrimData$gene_id)
   
   #choose the GO:####### pattern retain only this pattern (remove biological process text, etc.)
   pattern <- 'GO:[:digit:]{7}'
@@ -97,7 +97,7 @@ GOtermSep <- function(TrimmedData){
   for(i in 1:nrows){
     
     #move through gene id column and output names into geneNames list
-    geneNames[i] <- TrimmedData$gene_id[i]
+    geneNames[i] <- myTrimData$gene_id[i]
     
     #move through column that contains the GO terms we want to parse output items in list
     GOblastCol <- myTrimData$gene_ontology_blast[i] 
