@@ -1,5 +1,5 @@
 export(readTrinOutput, GOtermSep, RefCSV, matchHBGO)
 
-importFrom("reshape2")
-importFrom("dplyr")
+importFrom("reshape2", "melt")
+importFrom("dplyr", "arrange")
   
