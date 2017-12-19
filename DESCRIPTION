@@ -4,14 +4,10 @@ Date: 2017-12-19
 Title: Tools for Comparative Transcriptomics and Functional Enrichment in Honey bees 
 Authors@R: person("Sarai", "Stuart", role = c("aut", "cre"),
                   email = "saraihs2@illinois.edu")
-          
 Author: Sarai Stuart [aut, cre],
- 
 Maintainer: Sarai Stuart <saraihs2@illinois.edu>
-
 Description: This package includes functions to filter and sort new GO data and compare enriched genes to those
 GO terms previously enriched and identified in the honey bee brain associated with the defensive response. This 
 packaged is designed to easily pull out conserved enriched GO functions between data sets or species. 
-  
 Url:https://github.com/saraihs2/GOsorting
 License: GPL-3
