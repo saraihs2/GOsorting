@@ -66,6 +66,8 @@ readTrinOutput <- function(path){
   
 }
 
+pathVar <- "./New_GO_test_file.csv"
+myTrimData <- readTrinOutput(pathVar)
 
 ####FUNCTION 2: Separate individual GO terms listed per gene ####
 
@@ -111,6 +113,7 @@ GOtermSep <- function(TrimmedData){
   return(as.data.frame(myList))
 }
 
+myGOterm <- GOtermSep(myTrimData)
 
 ####FUNCTION 3: read in the reference honey bee GO file from Alaux et al. 2009 ####
 
@@ -139,7 +142,8 @@ RefCSV <- function(HBrefPath){
   return(HbGOtable)
 }
 
-
+HBrefPath <- "./HB_alarm_GOterms.csv"
+HbGOtable <- RefCSV(HBrefPath)
 
 ####FUNCTION 4: match my GO terms with the differentially enriched GO terms in the brain of the
 #honey be defensive response, and subset the list of terms ####
@@ -174,3 +178,5 @@ matchHBGO<- function(sampleGenes, GOref){
   
   return(merged_data)
 }
+
+matchHBGO(myGOterm,HbGOtable)
