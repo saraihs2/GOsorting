@@ -35,10 +35,13 @@ Sarai Stuart
 \code{\link{GOtermSep}}
 }
 \examples{
-# Path to test file
- path <- system.file("extdata",
+
+#Path to test file
+path <- system.file("extdata", 
                        "New_GO_test_file.csv",
                        package = "GOsorting")
+                       
+test.csv <- read.csv(path)
 
-# Insert "path" argument into function
-readTrinOutput(path)
+#Insert "path" argument into function
+test <- readTrinOutput(test.csv)

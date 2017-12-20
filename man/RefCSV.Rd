@@ -37,7 +37,7 @@ Sarai Stuart
 \code{\link{GOtermSep}}
 }
 
-\examples{
+\examples
 
 # Path to Honey Bee reference file
 HBrefPath <- system.file("extdata",
@@ -47,6 +47,4 @@ HBrefPath <- system.file("extdata",
 # Create the reference table to compare to input data                           
 HbGOtable <- RefCSV(HBrefPath)
 
-  }
-}
 

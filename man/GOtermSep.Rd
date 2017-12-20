@@ -32,14 +32,14 @@ Sarai Stuart
 \code{\link{matchHBGO}}
 }
 
-\examples{
+\examples
 
-# Path to test file
- path <- system.file("extdata",
+#Path to test file
+path <- system.file("extdata",
                        "New_GO_test_file.csv",
                        package = "GOsorting")
 
-# Insert "path" argument into function
+#Insert "path" argument into function
 myTrimData <- readTrinOutput(path)
 
 
@@ -47,7 +47,7 @@ elephant <- system.file("extdata",
                        "MyTrimData.csv",
                        package = "GOsorting")
 
-# Insert "myTrimData" argument into function
+#Insert "myTrimData" argument into function
 GOtermSep(myTrimData)
-}
+
 

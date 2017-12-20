@@ -41,7 +41,7 @@ Sarai
 \code{\link{RefCSV}}
 
 }
-\examples{
+\examples
 
 # Path my GO term test file
 myGOterm <- system.file("extdata",
@@ -55,6 +55,6 @@ HbGOtable <- system.file("extdata",
                           
 # Create a data frame of matched GO terms between my data and the honey bee                           
 matchHBGO(myGOterm,HbGOtable)
-  }
-}
+
+
 
