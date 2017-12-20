@@ -147,8 +147,8 @@ RefCSV <- function(HBrefPath){
 #order to match terms present in both sets of data
 matchHBGO<- function(sampleGenes, GOref){
   
-  require(reshape2)
-  require(dplyr)
+  library(reshape2)
+  library(dplyr)
 
   #create variable that is the length of my sample data
   col_num=ncol(sampleGenes)
