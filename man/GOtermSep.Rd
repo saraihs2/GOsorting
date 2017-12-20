@@ -40,14 +40,14 @@ Sarai Stuart
                        package = "GOsorting")
 
 # Insert "path" argument into function
-readTrinOutput(path)
+myTrimData <- readTrinOutput(path)
 
-# example test file
- TrimmedData <- as.data.frame(system.file("extdata",
-                       "myTrimData.csv",
-                       package = "GOsorting"))
+
+elephant <- system.file("extdata",
+                       "MyTrimData.csv",
+                       package = "GOsorting")
 
 # Insert "myTrimData" argument into function
-GOtermSep(TrimmedData)
+GOtermSep(myTrimData)
 }
 
