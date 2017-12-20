@@ -8,40 +8,40 @@
 readTrinOutput <- function(path){
   
   #all data from Trinotate output
-  fullTable <- read.csv(path, 
+  fullTable <- read.csv(path,
                         
                         #retain header lables from csv file
-                       header = TRUE,
-                       
-                       #separate strings by commas
-                       sep = ",",
-                       
-                       #lable missing data: convert "." to "NA" in R environment
-                       na.strings = ".",
-                       
-                       #column headers
-                       col.names = c("gene_id",
-                                     "transcript_id",
-                                     "sprot_Top_BLASTX_hit",
-                                     "RNAMMER",
-                                     "prot_id",
-                                     "prot_coords",
-                                     "sprot_Top_BLASTP_hit",
-                                     "custom_pombe_pep_BLASTX",
-                                     "custom_pombe_pep_BLASTP",
-                                     "Pfam",
-                                     "SignalP",
-                                     "TmHMM",
-                                     "eggnog",
-                                     "Kegg",
-                                     "gene_ontology_blast",
-                                     "gene_ontology_pfam",
-                                     "transcript",
-                                     "peptide"),
-                       
-                       #import all data as strings
-                       stringsAsFactors = FALSE)
- 
+                        header = TRUE,
+                        
+                        #separate strings by commas
+                        sep = ",",
+                        
+                        #lable missing data: convert "." to "NA" in R environment
+                        na.strings = ".",
+                        
+                        #column headers
+                        col.names = c("gene_id",
+                                      "transcript_id",
+                                      "sprot_Top_BLASTX_hit",
+                                      "RNAMMER",
+                                      "prot_id",
+                                      "prot_coords",
+                                      "sprot_Top_BLASTP_hit",
+                                      "custom_pombe_pep_BLASTX",
+                                      "custom_pombe_pep_BLASTP",
+                                      "Pfam",
+                                      "SignalP",
+                                      "TmHMM",
+                                      "eggnog",
+                                      "Kegg",
+                                      "gene_ontology_blast",
+                                      "gene_ontology_pfam",
+                                      "transcript",
+                                      "peptide"),
+                        
+                        #import all data as strings
+                        stringsAsFactors = FALSE)
+  
   #select columns of interest from fullTable and put output to a data frame called dataTrim 
   #while retaining headers
   dataTrim <- data.frame(fullTable$gene_id,
@@ -55,9 +55,9 @@ readTrinOutput <- function(path){
   #covert trimmed dataframe headers to original headers from Trinotate output file 
   #i.e. "fullTable$gene_id" will simply be "gene_id" 
   colnames(dataTrim) <- c("gene_id",
-                        "transcript_id",
-                        "gene_ontology_blast",
-                        "gene_ontology_pfam")
+                          "transcript_id",
+                          "gene_ontology_blast",
+                          "gene_ontology_pfam")
   
   #filter out rows of trimmed data in which no gene id is available
   myTrimData <- subset(dataTrim,(!is.na(dataTrim$gene_id)))
@@ -70,11 +70,11 @@ readTrinOutput <- function(path){
 ####FUNCTION 2: Separate individual GO terms listed per gene ####
 
 #separate individual GO terms listed for each gene in the column gene_ontology_blast
-GOtermSep <- function(myTrimData){
+GOtermSep <- function(TrimmedData){
   
   #size for preallocation of memory is the length of gene_id column because we are matching 
   #gene id and it's associated GO terms
-  nrows <- length(elephant$gene_id)
+  nrows <- length(TrimmedData$gene_id)
   
   #choose the GO:####### pattern retain only this pattern (remove biological process text, etc.)
   pattern <- 'GO:[:digit:]{7}'
@@ -96,7 +96,7 @@ GOtermSep <- function(myTrimData){
   for(i in 1:nrows){
     
     #move through gene id column and output names into geneNames list
-    geneNames[i] <- myTrimData$gene_id[i]
+    geneNames[i] <- TrimmedData$gene_id[i]
     
     #move through column that contains the GO terms we want to parse output items in list
     GOblastCol <- myTrimData$gene_ontology_blast[i] 
@@ -118,26 +118,27 @@ GOtermSep <- function(myTrimData){
 RefCSV <- function(HBrefPath){
   
   HbGOtable <- read.csv(HBrefPath,
-                      
-                      #keep column headers
-                      header = TRUE,
-                      
-                      #separate strings at the commas
-                      sep = ",",
-                      
-                      #convert missing data (.) to NAs
-                      na.strings = ".",
-                      
-                      #keep all strings as strings
-                      stringsAsFactors = FALSE,
-                      
-                      #column headers
-                      col.names = c("GO #",
-                                    "GO name",
-                                    "change in expression: alarm pher : control"))
+                        
+                        #keep column headers
+                        header = TRUE,
+                        
+                        #separate strings at the commas
+                        sep = ",",
+                        
+                        #convert missing data (.) to NAs
+                        na.strings = ".",
+                        
+                        #keep all strings as strings
+                        stringsAsFactors = FALSE,
+                        
+                        #column headers
+                        col.names = c("GO #",
+                                      "GO name",
+                                      "change in expression: alarm pher : control"))
   
   return(HbGOtable)
 }
+
 
 
 ####FUNCTION 4: match my GO terms with the differentially enriched GO terms in the brain of the
@@ -149,7 +150,7 @@ matchHBGO<- function(sampleGenes, GOref){
   
   library(reshape2)
   library(dplyr)
-
+  
   #create variable that is the length of my sample data
   col_num=ncol(sampleGenes)
   
@@ -173,14 +174,3 @@ matchHBGO<- function(sampleGenes, GOref){
   
   return(merged_data)
 }
-
-
-
-
-
-
-
-
-
-
-
