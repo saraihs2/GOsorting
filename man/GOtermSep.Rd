@@ -44,11 +44,8 @@ test.csv <- read.csv(path)
 #Insert "path" argument into function
 test <- readTrinOutput(test.csv)
 
-TrimmedData <- system.file("extdata",
-                       "MyTrimData.csv",
-                       package = "GOsorting")
 
 #Insert "myTrimData" argument into function
-GOtermSep(TrimmedData)
+GOtermSep(test)
 
 
