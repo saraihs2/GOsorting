@@ -33,12 +33,21 @@ Sarai Stuart
 }
 
 \examples{
+
+# Path to test file
+ path <- system.file("extdata",
+                       "New_GO_test_file.csv",
+                       package = "GOsorting")
+
+# Insert "path" argument into function
+readTrinOutput(path)
+
 # example test file
- myTrimData <- as.data.frame(system.file("extdata",
+ TrimmedData <- as.data.frame(system.file("extdata",
                        "myTrimData.csv",
                        package = "GOsorting"))
 
 # Insert "myTrimData" argument into function
-GOtermSep(myTrimData)
+GOtermSep(TrimmedData)
 }
 
