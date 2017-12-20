@@ -35,19 +35,20 @@ Sarai Stuart
 \examples
 
 #Path to test file
-path <- system.file("extdata",
+path <- system.file("extdata", 
                        "New_GO_test_file.csv",
                        package = "GOsorting")
+                       
+test.csv <- read.csv(path)
 
 #Insert "path" argument into function
-myTrimData <- readTrinOutput(path)
+test <- readTrinOutput(test.csv)
 
-
-elephant <- system.file("extdata",
+TrimmedData <- system.file("extdata",
                        "MyTrimData.csv",
                        package = "GOsorting")
 
 #Insert "myTrimData" argument into function
-GOtermSep(myTrimData)
+GOtermSep(TrimmedData)
 
 
